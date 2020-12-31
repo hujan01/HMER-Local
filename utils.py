@@ -67,7 +67,7 @@ def get_correct_numbers():
             
     print('{}/{}'.format(rightNum, len(gt_dict)))
 
-pred1Path = 'results/recognition_47p21.txt'
+pred1Path = 'results\correct_497.txt'
 pred2Path = 'results/recognition_48p50.txt'
 def compare_diff():
     """
