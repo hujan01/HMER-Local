@@ -3,7 +3,7 @@ Author: sigmoid
 Description:  generate pkl file
 Email: 595495856@qq.com
 Date: 2020-11-27 15:30:41
-LastEditTime: 2020-12-21 10:36:33
+LastEditTime: 2021-01-04 19:18:19
 '''
 import os
 import sys
@@ -50,8 +50,8 @@ def gen_pkl(image_path, label_path, outfile_path, channels=1) :
     print('save file done')
 
 if __name__ == "__main__":
-    image_path = 'offline/test2014'
-    label_path = 'Before-Data/test_caption.txt'
-    outfile_path = 'valid_v2.pkl'
+    image_path = 'offline/train'
+    label_path = 'data/label/train_caption.txt'
+    outfile_path = 'train_v1.pkl'
     gen_pkl(image_path, label_path, outfile_path)
  

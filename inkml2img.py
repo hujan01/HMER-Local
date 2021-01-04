@@ -3,7 +3,7 @@ Author: sigmoid
 Description: 生成不同尺寸的图片 
 Email: 595495856@qq.com
 Date: 2020-11-26 19:03:43
-LastEditTime: 2021-01-04 17:29:37
+LastEditTime: 2021-01-04 21:12:51
 '''
 import os
 import json, math
@@ -97,12 +97,12 @@ def inkml2img(input_path, output_path):
 			# data = [aug(item[0], item[1]) for item in data]
 			x, y = zip(*data) 
 			
-			plt.plot(x, y, linewidth=5, color='white')
-	plt.savefig(output_path, bbox_inches='tight', dpi=60)
+			plt.plot(x, y, linewidth=3, color='white')
+	plt.savefig(output_path, bbox_inches='tight', dpi=100, pad_inches=0.2)
 	plt.gcf().clear()
 
 if __name__ == "__main__":
-    img_root = 'D:/DataSet/DataInkml/train'
-    input_path = os.path.join(img_root, '2_em_3.inkml')
+    img_root = 'D:/DataSet/DataInkml/test2014'
+    input_path = os.path.join(img_root, '505_em_47.inkml')
     output_path = "results/src.png"
     inkml2img(input_path, output_path)

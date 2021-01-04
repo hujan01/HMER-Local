@@ -3,15 +3,16 @@ Author: sigmoid
 Description: 
 Email: 595495856@qq.com
 Date: 2020-11-27 10:48:29
-LastEditTime: 2021-01-04 17:24:42
+LastEditTime: 2021-01-04 21:44:38
 '''
 
 import os, glob, shutil
 from datetime import datetime
 
-import inkml2img as inkml2img
+# import inkml2img as inkml2img
+from inkml2img_v1 import inkml2img
 
-dataset = 'test2014' # 需要转换的数据集
+dataset = 'train' # 需要转换的数据集
 
 data_root = 'D:/DataSet/DataInkml'
 dataPath = os.path.join(data_root, dataset) 
@@ -42,7 +43,7 @@ if __name__ == "__main__":
         writeLog("[" + str(cnt) + "/" + str(numberOfFile) + "]" + "Processed " + fileInkml + " --> " + targetFolder + "\\" + fileName + ".png")
         try:
             imagePath = os.path.join(targetFolder, fileName+'.png')
-            inkml2img.inkml2img(fileInkml, imagePath)
+            inkml2img(fileInkml, imagePath)
         except:
             writeLog("Failed!")
             print("An error occured!")
