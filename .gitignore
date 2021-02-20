@@ -1,0 +1,10 @@
+.vscode
+offline
+csv
+data/DataInkml
+examples
+results
+__pycache__
+bbox
+maskImage_p75
+maskImage_p75.zip
