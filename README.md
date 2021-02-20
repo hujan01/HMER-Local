@@ -3,7 +3,7 @@
  * @Description: 
  * @Email: 595495856@qq.com
  * @Date: 2020-12-31 18:45:50
- * @LastEditTime: 2021-02-19 02:02:48
+ * @LastEditTime: 2021-02-21 01:20:20
 -->
 # HMER-Local
 1. 评估代码
@@ -14,5 +14,4 @@
 - gen_center_mask.py 生成的符号中心掩码图片
 - draw_bbox.py 绘制符号的矩形
 - \utils
-    - gen_center_mask.py 生成的中心掩码
 
