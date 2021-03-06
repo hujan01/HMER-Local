@@ -3,7 +3,7 @@ Author: sigmoid
 Description: 绘制矩形框
 Email: 595495856@qq.com
 Date: 2021-01-13 21:14:04
-LastEditTime: 2021-02-19 01:41:16
+LastEditTime: 2021-02-26 15:13:58
 '''
 import os
 import json
@@ -17,7 +17,7 @@ out_image_path = 'examples/'
 
 images = os.listdir(image_path)
 for image in images:
-    # image = '70_leo.png'
+    image = '200922-947-80.png'
     txt_name = os.path.splitext(image)[0]+'.txt'
     txt_path = os.path.join(bbox_path, txt_name)
     img = cv2.imread(os.path.join(image_path, image))
@@ -27,8 +27,8 @@ for image in images:
             spt = line.split()
             sym = spt[0]
             x_min, y_min, x_max, y_max = spt[1:]
-            cv2.rectangle(img, (int(x_min),int(y_min)), (int(x_max),int(y_max)), (0,255,0), 4)
+            cv2.rectangle(img, (int(x_min)-1,int(y_min)-1), (int(x_max)+1,int(y_max)+1), (0,255,0), 2)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img, sym, (int(x_min)+3, int(y_min)), font, 1, (0, 0, 255), 1)
+            # cv2.putText(img, sym, (int(x_min)+3, int(y_min)), font, 1, (0, 0, 255), 1)
             cv2.imwrite(out_image_path + image, img)
     print('success draw %s'%(image))

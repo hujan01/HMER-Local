@@ -3,7 +3,7 @@ Author: sigmoid
 Description: 生成中心掩码图片
 Email: 595495856@qq.com
 Date: 2021-01-18 21:02:37
-LastEditTime: 2021-02-19 01:42:49
+LastEditTime: 2021-02-26 15:16:22
 '''
 import os
 import cv2
@@ -17,6 +17,7 @@ def gen_center_mask(input_path, images_path, output_path, r=0.5):
     """
     files = os.listdir(input_path)
     for fname in files:
+        fname = '200922-947-80.txt'
         file_name = os.path.splitext(fname)[0]
         image_path = os.path.join(images_path, file_name+'.png') 
         img = cv2.imread(image_path, 0)
@@ -46,7 +47,7 @@ def gen_center_mask(input_path, images_path, output_path, r=0.5):
 if __name__ == "__main__":
     input_path = 'bbox/train'
     images_path = 'offline/train'
-    output_path = 'maskImage_p75'
+    output_path = 'maskImage'
     if not os.path.exists(output_path):
         os.makedirs(output_path)
-    gen_center_mask(input_path, images_path, output_path, r=0.75)    
+    gen_center_mask(input_path, images_path, output_path)    

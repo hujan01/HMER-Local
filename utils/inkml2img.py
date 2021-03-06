@@ -3,7 +3,7 @@ Author: sigmoid
 Description: 笔划坐标归一化，离线图片渲染，符号矩形框生成
 Email: 595495856@qq.com 
 Date: 2021-01-16 21:35:37
-LastEditTime: 2021-02-19 01:30:15
+LastEditTime: 2021-02-23 18:40:52
 '''
 import os, json, math
 from math import cosh
@@ -33,7 +33,7 @@ def parse_inkml(inkml_file_abs_path):
                 if coord.startswith(' '):   
                     coord_list = []           
                     for axis_coord in coord[1:].split(' '):
-                        if float(axis_coord).is_integer() :#or float(axis_coord)>8 :
+                        if float(axis_coord).is_integer(): #or float(axis_coord)>8 :
                             axis_coord = round(float(axis_coord))
                         else :
                             axis_coord = round(float(axis_coord)*10000)
@@ -41,7 +41,7 @@ def parse_inkml(inkml_file_abs_path):
                 else:
                     coord_list = []
                     for axis_coord in coord.split(' '):
-                        if float(axis_coord).is_integer() :#or float(axis_coord)>8:
+                        if float(axis_coord).is_integer(): #or float(axis_coord)>8:
                             axis_coord = round(float(axis_coord))
                         else :
                             axis_coord = round(float(axis_coord)*10000)
@@ -275,7 +275,6 @@ def get_bbox(inkml_path, sym_dict, img_h, img_w, min_r, min_c, bbox_out_path, pa
     print("success generate {}".format(img_name))
 
 def inkml2img(inkml_path, outImagePath):
-    sym_id = sym_id_traces(inkml_path)
     traces_all_dict = parse_inkml(inkml_path)
     traces = get_traces_data(traces_all_dict)
     traces = distance_normalize(traces)
@@ -311,9 +310,9 @@ def inkml2img_getbbox(inkml_path, outImagePath, bbox_out_path):
     min_r, min_c, _, _ = get_min_coords([item for sublist in traces for item in sublist]) 
     get_bbox(inkml_path, sym_dict, img_h, img_w, min_r, min_c, bbox_out_path)
         
-    
 if __name__ == "__main__":
     inkml_path = 'D:/DataSet/DataInkml/test2016/UN_463_em_912.inkml'
+    sym_id = sym_id_traces(inkml_path) # 所有符号的id
     # 获取坐标点并进行归一化
     traces_all_dict = parse_inkml(inkml_path)
     traces = get_traces_data(traces_all_dict)
@@ -321,6 +320,6 @@ if __name__ == "__main__":
     traces = [[[round(v) for v in p] for p in trace] for trace in traces]
 
     im = convert_to_imgs(traces)    
-    outImagePath = os.path.join("examples", "UN_463_em_912.png")
+    outImagePath = os.path.join("examples", "UN_463_em_911.png")
     imsave(outImagePath, im)
     print("generate image success!") 

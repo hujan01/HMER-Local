@@ -3,7 +3,7 @@ Author: sigmoid
 Description: 统计正确预测的数目，可视化识别结果, 分析两个预测结果的差异
 Email: 595495856@qq.com
 Date: 2020-12-31 15:12:42
-LastEditTime: 2021-02-04 17:17:16
+LastEditTime: 2021-02-26 16:52:54
 '''
 import os
 
@@ -126,7 +126,7 @@ def visual_result(txt1, txt2):
         except:
             print("latex error!!!")
 
-def fun1(rightPredPath, allPredPath):
+def main1(rightPredPath, allPredPath):
     """
         哪些错误的案例被修正
     """
@@ -152,14 +152,114 @@ def fun1(rightPredPath, allPredPath):
             fw.write(k+'\t'+all_[k])
             fw.write('\n')
     print("success!")   
-    
-if __name__ == "__main__":
-    pred_path = 'results/recognition_baseline.txt'
-    real_path = 'data/label/test_caption_2014.txt'
 
-    pred1 = 'parser/correct_423.txt'
-    pred2 = 'results/recognition_baseline.txt'
+def get_length_distribute(filePath, valid_uidlist) :
+    dic = read_txt(filePath)
+
+    length = {}
+    for uid, latex in dic.items():
+        if not uid in valid_uidlist: 
+            continue
+        latex_ls = latex.split()  
+        latex_length = len(latex_ls) # 该latex长度 包括结构字符{}
+        if latex_length<10 :
+            n = length.setdefault('0', 1)
+            n += 1
+            length['0'] = n
+        elif 10<=latex_length<20 :
+            n = length.setdefault('1', 1)
+            n += 1
+            length['1'] = n
+        elif 20<=latex_length<30  :
+            n = length.setdefault('2', 1)
+            n += 1
+            length['2'] = n
+        elif 30<=latex_length<40 :
+            n = length.setdefault('3', 1)
+            n += 1
+            length['3'] = n
+        elif 40<=latex_length<50 :
+            n = length.setdefault('4', 1)
+            n += 1
+            length['4'] = n
+        elif 50<=latex_length<60 :
+            n = length.setdefault('5', 1)
+            n += 1
+            length['5'] = n
+        elif 60<=latex_length<70 :
+            n = length.setdefault('6', 1)
+            n += 1
+            length['6'] = n
+    return length
+
+def get_train_length_distribute() :
+    dic = read_txt('data/label/train_caption.txt')
+    
+    valid_uidlist = []
+    with open('results/valid_image_list.txt') as fr:
+        valid_uidlist = [x.strip() for x in fr.readlines()]
+    s = 0
+    x = 0
+    length = {}
+    for uid, latex in dic.items():
+        if not uid in valid_uidlist: 
+            s += 1
+            continue
+        x += 1
+        latex_ls = latex.split()  
+        latex_length = len(latex_ls) # 该latex长度 包括结构字符{}
+        
+        if latex_length<10 :
+            n0 = length.setdefault('0', 0)
+            n0 += 1
+            length['0'] = n0
+        elif 10<=latex_length<20 :
+            n1 = length.setdefault('1', 0)
+            n1 += 1
+            length['1'] = n1
+        elif 20<=latex_length<30  :
+            n2 = length.setdefault('2', 0)
+            n2 += 1
+            length['2'] = n2
+        elif 30<=latex_length<40 :
+            n3 = length.setdefault('3', 0)
+            n3 += 1
+            length['3'] = n3
+        elif 40<=latex_length<50 :
+            n4 = length.setdefault('4', 0)
+            n4 += 1
+            length['4'] = n4
+        elif 50<=latex_length<60 :
+            n5 = length.setdefault('5', 0)
+            n5 += 1
+            length['5'] = n5
+        elif 60<=latex_length<70 :
+            n6 = length.setdefault('6', 0)
+            n6 += 1
+            length['6'] = n6
+    print(length)
+
+if __name__ == "__main__":
+    real_path = 'data/label/test_caption_2016_v2.txt'
+    pred1_path = 'results/recognize_tree_2016.txt'
+    pred2_path = 'results/recognize_MDA_2016.txt'
+    
+    correct1 = 'parser/correct_506.txt'
+    correct2 = 'parser/correct_471.txt'
+
+    main1(correct2, pred1_path)
     # compare_diff(pred1, pred2)
-    visual_result(pred1, pred2)
-    # get_correct_numbers(pred_path, real_path)
     # visual_result(pred1, pred2)
+    # get_correct_numbers(pred2_path, real_path)
+    # compare_diff(correct1, correct2)
+    # visual_result(pred1, pred2)
+    # get_train_length_distribute()
+    # valid_uidlist = list(read_txt(pred2).keys())
+
+    # gt_length_distr = get_length_distribute(real_path, valid_uidlist)
+    # pred_length_distr = get_length_distribute(pred1, valid_uidlist)
+    # for k, gt_length in gt_length_distr.items():
+    #     if k not in pred_length_distr: 
+    #         continue
+    #     pred_length = pred_length_distr[k]
+    #     print('{} ExpRate: {}'.format(k, pred_length/gt_length))
