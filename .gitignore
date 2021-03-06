@@ -6,5 +6,5 @@ examples
 results
 __pycache__
 bbox
-maskImage_p75
+maskImage
 maskImage_p75.zip
